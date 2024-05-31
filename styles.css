@@ -1,0 +1,60 @@
+body.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+.list-group-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.list-group-item .task-info {
+    display: flex;
+    align-items: center;
+}
+
+.list-group-item .task-info .priority {
+    width: 15px;
+    height: 15px;
+    margin-right: 10px;
+    border-radius: 50%;
+}
+
+.list-group-item .task-info .priority.high {
+    background-color: #ff0000;
+}
+
+.list-group-item .task-info .priority.medium {
+    background-color: #ffa500;
+}
+
+.list-group-item .task-info .priority.low {
+    background-color: #00ff00;
+}
+
+.list-group-item .task-actions {
+    display: flex;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #ffffff;
+}
+
+.modal-content.dark-mode {
+    background-color: #333333;
+}
+
+input, select, textarea, button {
+    margin: 5px;
+}
+
+#progressTracker, #analytics {
+    text-align: center;
+    margin: 20px;
+}
+
+progress {
+    width: 80%;
+}

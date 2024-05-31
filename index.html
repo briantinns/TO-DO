@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced To-Do List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">To-Do List</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <button class="btn btn-outline-secondary" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+                </li>
+                <li class="nav-item">
+                    <button class="btn btn-outline-primary" onclick="exportTasks()">Export Tasks</button>
+                </li>
+                <li class="nav-item">
+                    <input type="file" id="importFile" onchange="importTasks()" style="display:none;">
+                    <button class="btn btn-outline-primary" onclick="document.getElementById('importFile').click()">Import Tasks</button>
+                </li>
+                <li class="nav-item">
+                    <select id="languageSelect" class="form-control" onchange="setLanguage()">
+                        <option value="en">English</option>
+                        <option value="es">Spanish</option>
+                        <option value="fr">French</option>
+                    </select>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" id="taskInput" placeholder="Add a new task">
+            <input type="date" class="form-control" id="taskDate">
+            <select class="form-control" id="taskPriority">
+                <option value="High">High</option>
+                <option value="Medium">Medium</option>
+                <option value="Low">Low</option>
+            </select>
+            <input type="text" class="form-control" id="taskCategory" placeholder="Category">
+            <select class="form-control" id="taskRecurring">
+                <option value="none">None</option>
+                <option value="daily">Daily</option>
+                <option value="weekly">Weekly</option>
+                <option value="monthly">Monthly</option>
+            </select>
+            <textarea class="form-control" id="taskDescription" placeholder="Task Description"></textarea>
+            <input type="file" class="form-control" id="taskFile">
+            <div class="input-group-append">
+                <button class="btn btn-success" onclick="addTask()">Add</button>
+            </div>
+        </div>
+
+        <input type="text" class="form-control mb-3" id="searchInput" placeholder="Search tasks" oninput="searchTasks()">
+
+        <div class="sorting-options mb-3">
+            <button class="btn btn-outline-secondary" onclick="sortTasks('priority')">Sort by Priority</button>
+            <button class="btn btn-outline-secondary" onclick="sortTasks('date')">Sort by Date</button>
+            <button class="btn btn-outline-secondary" onclick="sortTasks('category')">Sort by Category</button>
+        </div>
+
+        <ul id="taskList" class="list-group" ondrop="drop(event)" ondragover="allowDrop(event)"></ul>
+
+        <div id="editModal" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Edit Task</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="text" class="form-control mb-2" id="editTaskInput">
+                        <input type="date" class="form-control mb-2" id="editTaskDate">
+                        <select class="form-control mb-2" id="editTaskPriority">
+                            <option value="High">High</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Low">Low</option>
+                        </select>
+                        <input type="text" class="form-control mb-2" id="editTaskCategory" placeholder="Category">
+                        <select class="form-control mb-2" id="editTaskRecurring">
+                            <option value="none">None</option>
+                            <option value="daily">Daily</option>
+                            <option value="weekly">Weekly</option>
+                            <option value="monthly">Monthly</option>
+                        </select>
+                        <textarea class="form-control mb-2" id="editTaskDescription" placeholder="Task Description"></textarea>
+                        <input type="file" class="form-control mb-2" id="editTaskFile">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" onclick="saveTask()">Save</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="progressTracker" class="text-center mt-5">
+            <h3>Progress Tracker</h3>
+            <progress id="taskProgress" value="0" max="100" class="w-75"></progress>
+            <span id="progressPercent">0%</span>
+        </div>
+
+        <div id="analytics" class="text-center mt-5">
+            <h3>Task Completion Analytics</h3>
+            <canvas id="analyticsChart" class="w-75"></canvas>
+        </div>
+        
+        
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/annyang/2.6.1/annyang.min.js"></script>
+    <script src="script.js"></script>
+    <script src="badges.js"></script>
+</body>
+</html>
