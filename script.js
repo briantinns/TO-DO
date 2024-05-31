@@ -257,6 +257,3 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-document.addEventListener('beforeunload', () => {
-    saveTasksToLocalStorage();
-});
